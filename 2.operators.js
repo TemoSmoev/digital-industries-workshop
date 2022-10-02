@@ -6,7 +6,7 @@ console.log(5 + "4"); // "54"
 
 // Assignment Operators
 let a = 6;
-a += 7;
+a += 7; // the same as a=a+7
 
 // Comparison Operators
 console.log(5 === 5); // true
@@ -16,6 +16,9 @@ console.log(5 >= 5); // true
 console.log(true ? "yes" : "no"); //yes
 
 // Logical Operators
+console.log(true && false); // false
+console.log(true && true); // true
+console.log(false && true); // false
 console.log(true && "hello world"); // hello world
 console.log(false && "hello world"); // false
 // logical && with some falsy values

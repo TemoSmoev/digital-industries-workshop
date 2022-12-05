@@ -6,7 +6,7 @@ const convert = (type, data) => {
 
 const createConverter = (type) => {
   return (data) => {
-    save(type, data);
+    convert(type, data);
   };
 };
 

@@ -1,0 +1,133 @@
+body {
+  font-family: mtavruli;
+}
+
+.menu {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.menu div {
+  width: 40px;
+  height: 30px;
+  border-left: 10px solid white;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.menu div:hover {
+  border-left: 10px solid #f3c90b;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  height: 60px;
+  background-color: #0f0f0f;
+}
+
+header .header_items {
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+header .header_items img {
+  width: 40px;
+}
+
+header .header_items_menu {
+  margin-left: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 40%;
+}
+
+header .header_items_menu a {
+  color: white;
+  text-decoration: none;
+}
+
+header .header_items_burger {
+  display: none;
+}
+
+@media only screen and (max-width: 991px) {
+  header .header_items_menu {
+    margin-left: 100px;
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  header .header_items_menu {
+    font-size: 13px;
+    margin-left: 50px;
+    width: 80%;
+  }
+  .subheader {
+    min-height: 500px;
+    padding-top: 80px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  header {
+    height: 50px;
+  }
+  header .header_items {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+  }
+  header .header_items img {
+    width: 30px;
+  }
+  header .header_items_menu {
+    transition: left 0.5s ease-in-out;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 60%;
+    left: -100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    justify-content: center;
+  }
+  header .header_items_menu a {
+    font-size: 15px;
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  header .header_items_menu.active {
+    left: 0;
+  }
+  header .header_items_burger {
+    padding: 10px;
+    display: block;
+  }
+  header .header_items_burger div {
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    margin-top: 5px;
+  }
+  header .header_items_burger div:nth-child(1) {
+    margin-top: 0;
+  }
+}

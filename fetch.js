@@ -1,60 +1,45 @@
 class Api {
   constructor() {}
-  getTodos = () => {
-    return fetch("https://jsonplaceholder.typicode.com/todos/")
-      .then((response) => response.json())
-      .then((json) => json);
+  fetchTodos = () => {
+    return fetch("https://jsonplaceholder.typicode.com/todos").then((r) => r.json());
   };
 }
 
 const api = new Api();
 
-class TodosObservable {
-  constructor() {
-    this.listeners = [];
-    this.init();
-  }
-  init = () => {
-    api.getTodos((res) => {
-      this.listeners.forEach((listener) => {
-        listener.setTodos(res);
-      });
+class Todo {
+  constructor() {}
+  createElement = (todoData) => {
+    let todo = document.createElement("div");
+    todo.className = "todo";
+    todo.innerHTML = todoData.title;
+    todo.addEventListener("click", () => {
+      todo.classList.toggle("done");
     });
+    this.node = todo;
   };
-  listen = (listener) => {
-    listeners.push(listener);
+  getElement = () => {
+    return this.node;
   };
 }
 
-class TodoNode {
+class Todos {
   constructor() {
-    this.node = null;
-  }
-  createNode = (title, isDone) => {
-    let container = document.createElement("div");
-    container.className = `todo ${isDone ? "done" : ""}`;
-    let title = document.createElement("div");
-    title.className = "todo-title";
-    container.appendChild(title);
-    container.addEventListener("onclick", () => {
-      container.classList.toggle("done");
-    });
-    return container;
-  };
-}
-
-class TodosNode {
-  constructor() {
-    init();
-    this.setTodos([]);
-  }
-  init = () => {
     this.todosNode = document.querySelector(".todos");
-  };
-  setTodos = (todos) => {
-    todos.forEach(() => {
-      this.todosNode.appendChild(new TodoNode());
+    this.fetchData();
+  }
+  fetchData = () => {
+    api.fetchTodos().then((res) => {
+      this.addData(res);
     });
   };
-  createTodoNode = (name) => {};
+  addData = (todos) => {
+    todos.forEach((todoData) => {
+      const todo = new Todo();
+      todo.createElement(todoData);
+      this.todosNode.appendChild(todo.getElement());
+    });
+  };
 }
+
+const todos = new Todos();

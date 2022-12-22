@@ -1,0 +1,18 @@
+.todos {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 15px;
+  width: 50%;
+  background-color: coral;
+}
+.todo {
+  border: 1px solid grey;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+.todo.done {
+  text-decoration: line-through;
+}

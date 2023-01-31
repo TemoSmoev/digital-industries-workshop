@@ -45,7 +45,7 @@ const checkIsPalindrome = (str) => {
   }
   return isPalindrome;
 };
-checkIsPalindrome("anna"); // 2
+checkIsPalindrome("anna"); // true
 
 // 5
 const parseObject = (obj) => {
@@ -80,7 +80,7 @@ calculateSum(5, 4, 3, 2, 1); // 15
 // 8
 // თუ არ გადავცემთ createCounter-ს initialValue არგუმენტს ის 0 იქნება.
 const createCounter = (initialValue = 0) => {
-  let value = 0;
+  let value = initialValue;
   return {
     increment: () => {
       value++;

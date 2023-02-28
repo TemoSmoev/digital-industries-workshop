@@ -1,45 +1,43 @@
-class Api {
-  constructor() {}
-  fetchTodos = () => {
-    return fetch("https://jsonplaceholder.typicode.com/todos").then((r) => r.json());
-  };
+const fetchPosts = () => fetch("https://jsonplaceholder.typicode.com/posts").then((res)=>res.json());
+const fetchUserById = (id) => fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then((res) => res.json());
+
+const todosNode=document.querySelector('.todos')
+const searchBarNode=document.querySelector('.input')
+
+const totalPosts=[]
+
+const clearPosts=()=>{
+  todosNode.innerHTML=''
 }
 
-const api = new Api();
-
-class Todo {
-  constructor() {}
-  createElement = (todoData) => {
-    let todo = document.createElement("div");
-    todo.className = "todo";
-    todo.innerHTML = todoData.title;
-    todo.addEventListener("click", () => {
-      todo.classList.toggle("done");
-    });
-    this.node = todo;
-  };
-  getElement = () => {
-    return this.node;
-  };
+const renderPost=(post)=>{
+  todosNode.innerHTML+=`
+    <div class="todo">
+        <div class="title"> <span>title:</span> ${post.title}</div>
+        <div class="description"> <span>description:</span> ${post.description}</div>
+        <div class="author"> <span>author:</span> ${post.author}</div>
+      </div>
+    `
 }
 
-class Todos {
-  constructor() {
-    this.todosNode = document.querySelector(".todos");
-    this.fetchData();
-  }
-  fetchData = () => {
-    api.fetchTodos().then((res) => {
-      this.addData(res);
-    });
-  };
-  addData = (todos) => {
-    todos.forEach((todoData) => {
-      const todo = new Todo();
-      todo.createElement(todoData);
-      this.todosNode.appendChild(todo.getElement());
-    });
-  };
-}
+searchBarNode.addEventListener('input',(e)=>{
+  clearPosts()
+  const searchValue=e.target.value
+  const filteredPosts=totalPosts.filter((post)=>post.title.includes(searchValue))
+  filteredPosts.forEach((post)=>renderPost(post))
+})
 
-const todos = new Todos();
+const initialise = () => {
+  fetchPosts().then((posts) => {
+    posts.forEach(post => {
+      fetchUserById(post.userId).then((user)=>{
+        const postWithUserName={title:post.title,description:post.body,author:user.name}
+        totalPosts.push(postWithUserName)
+        renderPost(postWithUserName)
+      })
+    });
+  });
+};
+initialise();
+
+// posts.filter((post)=>post.title.includes(keyword))
